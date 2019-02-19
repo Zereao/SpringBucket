@@ -1,0 +1,13 @@
+#在默认情况下erureka server也是一个eureka client ,必须要指定一个 server
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 通过eureka.client.registerWithEureka：false和fetchRegistry：false来表明自己是一个eureka server.
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
