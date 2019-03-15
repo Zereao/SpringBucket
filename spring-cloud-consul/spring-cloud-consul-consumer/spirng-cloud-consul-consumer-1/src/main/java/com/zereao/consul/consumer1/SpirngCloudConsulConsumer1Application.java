@@ -1,14 +1,13 @@
-package com.zereao.springbootadminclient;
+package com.zereao.consul.consumer1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootAdminClientApplication {
+public class SpirngCloudConsulConsumer1Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootAdminClientApplication.class, args);
+        SpringApplication.run(SpirngCloudConsulConsumer1Application.class, args);
     }
 
 }
-
