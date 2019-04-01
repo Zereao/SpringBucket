@@ -21,6 +21,7 @@
         <module>spring-security</module>
         <module>spring-cloud-eureka</module>
         <module>spring-cloud-consul</module>
+        <module>spring-boot-daily-report</module>
     </modules>
 
     <properties>
