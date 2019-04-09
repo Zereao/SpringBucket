@@ -21,7 +21,9 @@
         <module>spring-security</module>
         <module>spring-cloud-eureka</module>
         <module>spring-cloud-consul</module>
+        <module>spring-cloud-zookeeper</module>
         <module>spring-boot-daily-report</module>
+        <module>spring-boot-rocketmq</module>
     </modules>
 
     <properties>
@@ -38,6 +40,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
