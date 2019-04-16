@@ -24,6 +24,7 @@
         <module>spring-cloud-zookeeper</module>
         <module>spring-boot-daily-report</module>
         <module>spring-boot-rocketmq</module>
+        <module>spring-boot-demo</module>
     </modules>
 
     <properties>

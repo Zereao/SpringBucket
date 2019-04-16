@@ -1,0 +1,12 @@
+
+###
+GET http://localhost:8080/test/user?id=1&name=张三
+Content-Type: application/x-www-form-urlencoded
+
+
+###
+GET http://localhost:8080/test/get
+Content-Type: application/json
+
+
+###
