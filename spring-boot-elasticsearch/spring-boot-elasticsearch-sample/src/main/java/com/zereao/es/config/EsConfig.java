@@ -17,13 +17,12 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "elasticsearch")
 public class EsConfig {
     private String host;
-    private String clusterName;
+    private Integer port;
 
     @Bean(destroyMethod = "close")
     public RestHighLevelClient client() {
         return new RestHighLevelClient(RestClient.builder(
-                new HttpHost(host, 9200, "http")
+                new HttpHost(host, port, "http")
         ));
     }
-
 }

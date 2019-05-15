@@ -1,9 +1,6 @@
 package com.zereao.es.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.zereao.es.pojo.po.Book;
-import com.zereao.es.pojo.vo.BookAddVO;
-import com.zereao.es.pojo.vo.BookUpdateVO;
+import com.zereao.es.pojo.vo.BookVO;
 import com.zereao.es.pojo.vo.BoolQueryVO;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
@@ -39,22 +36,19 @@ public class BookService {
     @Resource
     private RestHighLevelClient client;
 
-    public Book findBookById(String id) {
+    public String findBookById(String id) {
         GetRequest request = new GetRequest("book", id);
         try {
             GetResponse response = client.get(request, RequestOptions.DEFAULT);
             Map<String, Object> resultMap = response.getSource();
-            JSONObject resultJson = new JSONObject(resultMap);
-            Book book = resultJson.toJavaObject(Book.class);
-            book.setId(response.getId());
-            return book;
+            return resultMap.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public void addBook(BookAddVO vo) {
+    public String addBook(BookVO vo) {
         try {
             XContentBuilder content = XContentFactory.jsonBuilder().startObject()
                     .field("type", vo.getType())
@@ -65,23 +59,25 @@ public class BookService {
                     .endObject();
             IndexRequest request = new IndexRequest("book").source(content);
             IndexResponse response = client.index(request, RequestOptions.DEFAULT);
-            System.out.println(response);
+            return response.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void delete() {
+    public String delete(String id) {
         try {
-            DeleteRequest request = new DeleteRequest("book").id("PUPvtWoBd2QFj63oPVsT");
+            DeleteRequest request = new DeleteRequest("book").id(id);
             DeleteResponse response = client.delete(request, RequestOptions.DEFAULT);
-            System.out.println(response);
+            return response.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void update(BookUpdateVO vo) {
+    public String update(BookVO vo) {
         try {
             UpdateRequest request = new UpdateRequest("book", vo.getId());
             XContentBuilder content = XContentFactory.jsonBuilder().startObject()
@@ -93,10 +89,11 @@ public class BookService {
                     .endObject();
             request.doc(content);
             UpdateResponse response = client.update(request, RequestOptions.DEFAULT);
-            System.out.println(response);
+            return response.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 
@@ -113,10 +110,8 @@ public class BookService {
                     .from(vo.getGtWordCount()).to(vo.getLtWordCount());
             boolQuery.filter(rangeQuery);
         }
-        SearchRequest searchRequest = new SearchRequest();
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(boolQuery);
-        searchRequest.source(searchSourceBuilder);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder().query(boolQuery);
+        SearchRequest searchRequest = new SearchRequest().source(searchSourceBuilder);
         try {
             SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
             return response.toString();

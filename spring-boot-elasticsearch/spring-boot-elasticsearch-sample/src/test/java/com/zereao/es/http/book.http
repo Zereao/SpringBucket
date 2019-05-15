@@ -1,6 +1,6 @@
 
 ###
-GET http://localhost:8080/book/get/1
+GET http://localhost:8080/book/get/PkMju2oBd2QFj63oa1sE
 Content-Type: application/json
 
 {}
@@ -12,9 +12,9 @@ Content-Type: application/json
 {
   "type": "IT",
   "wordCount": 90000,
-  "author": "张大飞",
+  "author": "小伦",
   "title": "跟Z开始学ES",
-  "publishDate": "2019-05-14 17:48:20"
+  "publishDate": "2019-05-15 16:56:20"
 }
 
 ###
@@ -22,13 +22,19 @@ POST http://localhost:8080/book/update
 Content-Type: application/json
 
 {
-  "id": "1",
+  "id": "PkMju2oBd2QFj63oa1sE",
   "type": "IT",
   "wordCount": 8978,
-  "author": "张翠山",
-  "title": "黄小龙转圈圈2",
-  "publishDate": "2019-02-19 07:24:14"
+  "author": "小伦伦",
+  "title": "小伦的ES文章",
+  "publishDate": "2019-05-15 19:29:14"
 }
+
+###
+GET http://localhost:8080/book/delete/PkMju2oBd2QFj63oa1sE
+Content-Type: application/json
+
+{}
 
 ###
 POST http://localhost:8080/book/bool

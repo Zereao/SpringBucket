@@ -7,7 +7,7 @@ import lombok.Data;
  * @version 2019/05/14 19:03
  */
 @Data
-public class BookUpdateVO {
+public class BookVO {
     private String id;
     private String type;
     private Integer wordCount;

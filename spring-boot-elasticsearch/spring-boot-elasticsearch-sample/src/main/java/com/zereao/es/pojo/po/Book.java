@@ -1,10 +1,6 @@
 package com.zereao.es.pojo.po;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @author Zereao
@@ -20,7 +16,6 @@ public class Book {
     /**
      * 文章字数
      */
-    @JsonProperty("word_count")
     private Integer wordCount;
     /**
      * 作者
@@ -33,7 +28,5 @@ public class Book {
     /**
      * 出版日期
      */
-    @JsonProperty("publish_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date publishDate;
+    private String publishDate;
 }

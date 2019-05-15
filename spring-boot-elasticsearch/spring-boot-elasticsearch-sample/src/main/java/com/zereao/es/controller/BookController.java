@@ -1,7 +1,6 @@
 package com.zereao.es.controller;
 
-import com.zereao.es.pojo.vo.BookAddVO;
-import com.zereao.es.pojo.vo.BookUpdateVO;
+import com.zereao.es.pojo.vo.BookVO;
 import com.zereao.es.pojo.vo.BoolQueryVO;
 import com.zereao.es.service.BookService;
 import org.springframework.web.bind.annotation.*;
@@ -20,33 +19,26 @@ public class BookController {
 
     @GetMapping("get/{id}")
     public String get(@PathVariable("id") String id) {
-        return bookService.findBookById(id).toString();
+        return bookService.findBookById(id);
     }
 
     @PostMapping("add")
-    public String add(@RequestBody BookAddVO vo) {
-        bookService.addBook(vo);
-        return "SUCCESS";
+    public String add(@RequestBody BookVO vo) {
+        return bookService.addBook(vo);
     }
 
-    @GetMapping("delete")
-    public String delete() {
-        bookService.delete();
-        return "SUCCESS";
+    @GetMapping("delete/{id}")
+    public String delete(@PathVariable("id") String id) {
+        return bookService.delete(id);
     }
 
     @PostMapping("update")
-    public String update(@RequestBody BookUpdateVO vo) {
-        bookService.update(vo);
-        return "SUCCESS";
+    public String update(@RequestBody BookVO vo) {
+        return bookService.update(vo);
     }
 
     @PostMapping("bool")
     public String boolQuery(@RequestBody BoolQueryVO vo) {
-        return bookService.boolQuery(vo);
-    }
-
-    public String terms() {
         return bookService.boolQuery(vo);
     }
 }
