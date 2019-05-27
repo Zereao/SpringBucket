@@ -1,0 +1,9 @@
+
+###
+GET http://localhost:8080/test/sec
+Content-Type: application/json
+token: THE_TOKEN
+
+{}
+
+###

@@ -4,17 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zereao</groupId>
-        <artifactId>spring-bucket</artifactId>
+        <artifactId>spring-boot-elasticsearch</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>spring-security</artifactId>
-    <version>${parent.version}</version>
-    <name>spring-security</name>
+    <artifactId>spring-boot-elasticsearch-with-starter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-boot-elasticsearch-with-starter</name>
     <description>Demo project for Spring Boot</description>
-
-    <modules>
-        <module>spring-security-samples</module>
-    </modules>
 
     <properties>
         <java.version>1.8</java.version>
@@ -23,22 +20,9 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
