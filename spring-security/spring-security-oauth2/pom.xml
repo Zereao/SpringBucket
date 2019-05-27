@@ -4,19 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zereao</groupId>
-        <artifactId>spring-bucket</artifactId>
+        <artifactId>spring-security</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
-    <artifactId>spring-boot-elasticsearch</artifactId>
+    <artifactId>spring-security-oauth2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-elasticsearch</name>
-    <description>Demo project for Spring Boot Elasticsearch</description>
-
-    <modules>
-        <module>spring-boot-elasticsearch-sample</module>
-        <module>spring-boot-elasticsearch-with-starter</module>
-    </modules>
+    <name>spring-security-oauth2</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -24,9 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
     </dependencies>
 
