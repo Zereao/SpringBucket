@@ -3,6 +3,9 @@ package com.zereao.security.security.filter;
 import com.zereao.security.po.TheUser;
 import com.zereao.security.po.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,14 +14,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,13 +37,11 @@ import java.io.IOException;
  * @version 2019/05/16 17:44
  */
 @Slf4j
-@Service
+@Configuration
 public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     //    @Value("${FilterProcessesUrl}")
     private String filterProcessesUrl = "/login";
-
-    private static final String FILTER_APPLIED = "__spring_security_tokenLoginFilter_filter_Applied";
 
     /**
      * 这里，设置当前 Filter 只处理 /login 这个URI路径
@@ -99,18 +97,19 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.getWriter().print(entity.toString());
     }
 
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req.getAttribute(FILTER_APPLIED) != null) {
-            log.info("TokenLoginFilter 已经被加载过，直接进入下一个过滤器！");
-            chain.doFilter(req, res);
-            return;
-        }
-        // 在spring容器托管的GenericFilterBean的bean，都会自动加入到servlet的filter chain（MVC的Filter链中）
-        // 而根据WebSecurityConfig里面的定义，还额外把filter加入到了spring security的Filter链中。
-        // 而spring security也是一系列的filter，在mvc的filter之前执行。因此在鉴权通过的情况下，就会先后各执行一次。
-        // https://segmentfault.com/a/1190000012173419
-        req.setAttribute(FILTER_APPLIED, true);
-        super.doFilter(req, res, chain);
+    /**
+     * 如果使用SpringBoot，Spring Context 上下文中的任何GenericFilterBean 都会被自动添加到 Servlet 的 filter chain 中，
+     * 此外，还额外把filter加入到了spring security的AnonymousAuthenticationFilter之前。
+     * 而spring security也是一系列的filter，在mvc的filter之前执行。
+     * <p>
+     * 因此在鉴权通过的情况下，就会先后各执行一次。
+     * 为特定的Filter或Servlet bean创建一个registration，并将它标记为disabled，可以禁用该filter或servlet。例如：
+     */
+    @Bean
+    public FilterRegistrationBean<TokenLoginFilter> tokenLoginFilterRegBean(TokenLoginFilter filter) {
+        FilterRegistrationBean<TokenLoginFilter> regBean = new FilterRegistrationBean<>();
+        regBean.setFilter(filter);
+        regBean.setEnabled(false);
+        return regBean;
     }
 }

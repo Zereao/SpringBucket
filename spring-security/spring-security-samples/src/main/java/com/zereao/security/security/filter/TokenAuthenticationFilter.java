@@ -1,9 +1,11 @@
 package com.zereao.security.security.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -22,20 +24,12 @@ import java.util.Collections;
  * @version 2019/05/16 19:13
  */
 @Slf4j
-@Service
+@Configuration
 public class TokenAuthenticationFilter extends GenericFilterBean {
-
-    private static final String FILTER_APPLIED = "__spring_security_tokenAuthenticationFilter_filter_Applied";
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if (servletRequest.getAttribute(FILTER_APPLIED) != null) {
-            log.info("TokenAuthenticationFilter 已经被加载过了，直接进入Filter链中的下一环！");
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
-        }
         String token = ((HttpServletRequest) servletRequest).getHeader("token");
-        servletRequest.setAttribute(FILTER_APPLIED, true);
         // token 为空，就继续下一个Filter
         if (StringUtils.isEmpty(token)) {
             log.info("token为空，进入下一环！");
@@ -53,5 +47,13 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
         }
         log.info("token校验完毕，进入下一环！");
         filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    @Bean
+    public FilterRegistrationBean<TokenAuthenticationFilter> tokenAuthFilterRegBean(TokenAuthenticationFilter filter) {
+        FilterRegistrationBean<TokenAuthenticationFilter> regBean = new FilterRegistrationBean<>();
+        regBean.setFilter(filter);
+        regBean.setEnabled(false);
+        return regBean;
     }
 }
