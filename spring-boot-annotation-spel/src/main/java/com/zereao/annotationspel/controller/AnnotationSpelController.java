@@ -1,4 +1,4 @@
-package com.zereao.annotationspel.annotation.controller;
+package com.zereao.annotationspel.controller;
 
 import com.zereao.annotationspel.service.BusinessCacheService;
 import org.springframework.http.ResponseEntity;

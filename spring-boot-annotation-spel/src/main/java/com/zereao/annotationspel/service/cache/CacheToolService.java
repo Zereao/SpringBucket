@@ -1,4 +1,4 @@
-package com.zereao.annotationspel.service;
+package com.zereao.annotationspel.service.cache;
 
 import org.springframework.stereotype.Service;
 
