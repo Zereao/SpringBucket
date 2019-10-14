@@ -1,4 +1,4 @@
-package com.zereao.springcloudeurekaclient;
+package com.zereao.springbootannotationspel;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringCloudConsulProducer1ApplicationTests {
+public class AnnotationSpelApplicationTests {
 
     @Test
     public void contextLoads() {
