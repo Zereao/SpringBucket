@@ -28,6 +28,7 @@
         <module>spring-boot-elasticsearch</module>
         <module>spring-boot-annotation-spel</module>
         <module>spring-boot-multi-datasource</module>
+        <module>spring-boot-mybatis-custom-language-driver</module>
     </modules>
 
     <properties>
