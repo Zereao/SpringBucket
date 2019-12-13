@@ -19,7 +19,7 @@ public class CustomXmlLanguageDriver extends XMLLanguageDriver {
     /**
      * 自定义 if 条件查询 if(name != null and someTable.column != "" ) {a.name = #{name} and [other expressions] }
      */
-    private static final Pattern CUSTOM_IF_NULL_RULE = Pattern.compile(".^*if\\s*\\((.*)\\)\\s*\\[(.*)]", Pattern.CASE_INSENSITIVE);
+    private static final Pattern CUSTOM_IF_NULL_RULE = Pattern.compile("if\\s*\\((.*)\\)\\s*\\[(.*)]", Pattern.CASE_INSENSITIVE);
 
     private static final Pattern SCRIPT_TAG_PATTERN = Pattern.compile("^<script>.*</script>$");
 
