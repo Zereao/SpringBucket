@@ -19,8 +19,6 @@ public class AnnotationSpelController {
     @Resource
     public BusinessCacheService businessCacheService;
 
-    @Resource
-
     @GetMapping
     public ResponseEntity<String> testSpel() {
         Method method = new Object() {}.getClass().getEnclosingMethod();

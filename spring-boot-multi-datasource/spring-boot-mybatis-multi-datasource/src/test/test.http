@@ -1,0 +1,9 @@
+
+
+###
+GET http://localhost:8080/test/getStudentByUserId?userId=1
+Content-Type: application/json
+
+{}
+
+###
